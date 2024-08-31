@@ -1,0 +1,20 @@
+.center-text {
+  text-align: center; /* Centre horizontalement */
+
+}
+/* .footer {
+  max-height: 60px;
+  height: 60px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+} */
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  max-height: 60px;
+  width: 100%; /* Pour occuper toute la largeur de la page */
+  padding: 20px; /* Ajoutez du padding pour plus d'espace autour du contenu */
+  /* Ajoutez d'autres styles selon vos besoins */
+}

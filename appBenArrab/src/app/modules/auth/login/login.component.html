@@ -1,0 +1,90 @@
+<div class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="javascript:void(0)"><b>Bataa</b>.tn</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Connectez-vous pour démarrer votre session</p>
+
+      <form [formGroup]="loginForm"  (ngSubmit)="onSingIn()">
+        <div class="input-group mb-3">
+          <!-- <label >Email</label> -->
+          <input
+              type="email"
+              formControlName="email"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': emailErrors.includes('email') }"
+              id="email"
+              placeholder="Email"
+              (input)="clearEmailError()"
+              (focus)="onEmailFocus()"
+              (blur)="onEmailBlur()"
+          />
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+
+          <span
+              id="email-error"
+              *ngIf="emailErrors.includes('email')"
+              class="error invalid-feedback"
+          >
+              {{ emailFormError.errorForEmail }}
+          </span>
+        </div>
+        <div class="input-group mb-3">
+          <!-- <label >Mot de passe</label> -->
+
+          <input
+    type="password"
+    formControlName="password"
+    class="form-control"
+    [ngClass]="{ 'is-invalid': passwordErrors.includes('password') }"
+    id="password"
+    placeholder="Mot de passe"
+    (input)="clearPasswordError()"
+    (focus)="onPasswordFocus()"
+    (blur)="onPasswordBlur()"
+/>
+<div class="input-group-append">
+  <div class="input-group-text">
+    <span class="fas fa-lock"></span>
+  </div>
+</div>
+
+<span
+    id="password-error"
+    *ngIf="passwordErrors.includes('password')"
+    class="error invalid-feedback"
+>
+    {{ passwordFormError.errorForPassword }}
+</span>
+
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+
+          </div>
+          <!-- /.col -->
+          <div class="col-5">
+            <!-- <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid">Connexion</button> -->
+            <button type="submit" class="btn btn-primary btn-block" >Connexion</button>
+          </div>
+          <!-- <a [routerLink]="['/login']" class="text-center">Vous avez oublié votre nom d'utilisateur et/ou votre mot de passe ?
+
+          </a> -->
+          <!-- /.col -->
+        </div>
+      </form>
+
+
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+</div>

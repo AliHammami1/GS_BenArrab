@@ -1,0 +1,187 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Gestionnaire</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a routerLink="/dashboard">Accueil</a></li>
+            <li class="breadcrumb-item active">Gestionnaire</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+<section class="content">
+    <div *ngIf="!OnLoud">
+      <mat-spinner class="center-spinner"></mat-spinner>
+    </div>
+    <div *ngIf="OnLoud">
+      <div class="container-fluid">
+        <!-- /.row -->
+  
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title marge-en-haut">Liste des Gestionnaires</h3>
+                <button type="button" data-toggle="modal" data-target="#user-modal" class="card-title btn btn-primary"
+                  style="float: right" class="btn btn-primary">
+                  Ajouter Gestionnaire
+                </button>
+  
+              </div>
+  
+              <!-- /.card-header -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+  <div *ngFor="let item of userData">
+    <div class=" col-12 tab-content p-3" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab">
+        <!-- vendeur -->
+        <section class="content  ">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 d-flex align-items-stretch flex-column">
+              <div class="card bg-light d-flex flex-fill">
+                <div class="card-header text-muted border-bottom-0">
+                </div>
+                <div class="card-body pt-0">
+                  <div class="row">
+                    <div class="col-7">
+                      <ul class="ml-4 mb-0 fa-ul text-muted">
+                        <li class="item"><span><i class="fas  fa-envelope"></i></span>&nbsp; <b> Nom :</b> {{ item.nom }}
+                        </li>
+                        <li class="item"><span><i class="fas  fa-envelope"></i></span>&nbsp; <b> Prenom :</b> {{ item.prenom }}
+                        </li>
+                        <li class="item"><span><i class="fas  fa-envelope"></i></span>&nbsp; <b> Email :</b>
+                          {{ item.email }}
+                        </li>
+                        <li class="item"><span><i class="fas  fa-phone-alt"></i></span> &nbsp; <b>Phone :</b> {{ item.tel }}
+                        </li>
+                      </ul>
+    
+                    </div>
+    
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- fin vendeur -->
+    
+      </div>
+    </div>
+  </div>
+  
+  
+    <!-- modal-->
+    <div class="modal fade" id="user-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Ajouter Gestionnaire</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+              (click)="closeModalAndResetForm()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form [formGroup]="GestionnaireForm" (ngSubmit)="onsub()">
+            <div class="modal-body">
+  
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="nomcategorie">Nom</label>
+                      <input type="text" formControlName="nom" class="form-control"
+                        [ngClass]="{ 'is-invalid': errors.includes('nom') }" id="nomcategorie" placeholder="Nom Categorie"
+                        (input)="clearError()" (focus)="onFocus()" (blur)="onBlur()" />
+                      <span id="nomcategorie-error" *ngIf="errors.includes('nom')" class="error invalid-feedback">
+                        {{ formError.errorFornom }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="nomcategorie">Prenom</label>
+                      <input type="text" formControlName="prenom" class="form-control"
+                        [ngClass]="{ 'is-invalid': errors.includes('nom') }" id="nomcategorie" placeholder="Nom Categorie"
+                        (input)="clearError()" (focus)="onFocus()" (blur)="onBlur()" />
+                      <span id="nomcategorie-error" *ngIf="errors.includes('nom')" class="error invalid-feedback">
+                        {{ formError.errorFornom }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                
+                <div class="form-group">
+                  <label for="nomcategorie">Numéro Téléphone</label>
+                  <input type="text" formControlName="tel" class="form-control"
+                    [ngClass]="{ 'is-invalid': errors.includes('nom') }" id="nomcategorie" placeholder="Nom Categorie"
+                    (input)="clearError()" (focus)="onFocus()" (blur)="onBlur()" />
+                  <span id="nomcategorie-error" *ngIf="errors.includes('nom')" class="error invalid-feedback">
+                    {{ formError.errorFornom }}
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="nomcategorie">Email</label>
+                  <input type="text" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': errors.includes('nom') }" id="nomcategorie" placeholder="Nom Categorie"
+                    (input)="clearError()" (focus)="onFocus()" (blur)="onBlur()" />
+                  <span id="nomcategorie-error" *ngIf="errors.includes('nom')" class="error invalid-feedback">
+                    {{ formError.errorFornom }}
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="nomcategorie">Mot de Passe</label>
+                  <input type="text" formControlName="psw" class="form-control"
+                    [ngClass]="{ 'is-invalid': errors.includes('nom') }" id="nomcategorie" placeholder="Nom Categorie"
+                    (input)="clearError()" (focus)="onFocus()" (blur)="onBlur()" />
+                  <span id="nomcategorie-error" *ngIf="errors.includes('nom')" class="error invalid-feedback">
+                    {{ formError.errorFornom }}
+                  </span>
+                </div>
+                <!--<div class="form-group">
+                  <label for="nomcategorie">Confirmer Mot de Passe</label>
+                  <input type="text" formControlName="nomcategorie" class="form-control"
+                    [ngClass]="{ 'is-invalid': errors.includes('nom') }" id="nomcategorie" placeholder="Nom Categorie"
+                    (input)="clearError()" (focus)="onFocus()" (blur)="onBlur()" />
+                  <span id="nomcategorie-error" *ngIf="errors.includes('nom')" class="error invalid-feedback">
+                    {{ formError.errorFornom }}
+                  </span>
+                </div>-->
+              </div>
+              <!-- /.card-body -->
+  
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" (click)="closeModalAndResetForm()" data-dismiss="modal">
+                Anuler
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Create
+              </button>
+  
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!--fin modal-->

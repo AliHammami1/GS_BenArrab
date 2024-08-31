@@ -1,0 +1,12 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+.marge-en-haut {
+  margin-top: 12px; /* Vous pouvez ajuster la valeur de la marge selon vos besoins */
+  /* padding-top: 20px;
+   */
+}
+.center-spinner {
+  position: fixed;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,89 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a routerLink="/dashboard" class="brand-link">
+    <img src="assets/dist/img/4.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      style="opacity: 0.8" />
+    <span class="brand-text font-weight-light">BEN Arrab</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="assets/dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" />
+      </div>
+      <div class="info">
+        <a routerLink="/dashboard" class="d-block">Administrateur</a>
+      </div>
+    </div>
+
+
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+               <li class="nav-item">
+                <a routerLink="/dashboard" [routerLinkActive]="['active']" class="nav-link">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Tableau de bord
+                  </p>
+                </a>
+              </li>
+
+
+        <!--<li class="nav-item">
+          <a  class="nav-link">
+            <i class="nav-icon fas fa-cubes"></i>
+            <p>
+              Produits
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/produit']" [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Produits En Stock</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/produitNonconfirmer']" [routerLinkActive]="['active']" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Produits Hors Stock</p>
+              </a>
+            </li>
+          </ul>
+        </li>-->
+        
+        <!-- hethom leli bou ka3baa -->
+        <ng-container *ngFor="let item of navItems">
+          <li class="nav-item">
+            <a [routerLink]="[item.url]" [routerLinkActive]="['active']" class="nav-link">
+              <i [class]="item.iconComponent.name"></i>
+              <p>
+                {{ item.name }}
+              </p>
+            </a>
+          </li>
+        </ng-container>
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        </div>
+        
+      <li class="nav-item">
+        <a (click)="Deconnexion()"  class="nav-link">
+          <i class="nav-icon fas fa-lock"></i>
+          <p>
+            Deconexion
+          </p>
+        </a>
+      </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

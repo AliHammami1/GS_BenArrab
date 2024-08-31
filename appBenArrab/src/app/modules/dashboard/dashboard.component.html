@@ -1,0 +1,101 @@
+<!-- <app-main-header></app-main-header>
+<app-main-sidebar></app-main-sidebar> -->
+<!-- Content Wrapper. Contains page content -->
+<!-- <div class="content-wrapper"> -->
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row ">
+      <div class="col-sm-6">
+        <h1 class="m-0">Tableau de bord</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+
+          <li class="breadcrumb-item active">Tableau de bord</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div *ngIf=" !OnLoud1  || !OnLoud4  || !OnLoud7 ">
+    <mat-spinner class="center-spinner"></mat-spinner>
+
+  </div>
+  <div *ngIf=" OnLoud1  && OnLoud4  && OnLoud7 ">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-4 col-6">
+          <!-- small box -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3>{{ nbuserConf }}</h3>
+
+              <p>Produits En Stocks</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-ios-people"></i>
+
+            </div>
+            <a routerLink="/produit" class="small-box-footer">Plus d'informations <i
+                class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3>{{ nbprodconf }}</h3>
+
+              <p>Produit En Production</p>
+            </div>
+            <div class="icon">
+              <i class="fas fas fa-cubes"></i>
+
+            </div>
+            <a routerLink="/produit" class="small-box-footer">Plus d'informations <i
+                class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3>{{ nbCategiorieNONArch }}</h3>
+
+              <p>Depôt</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-list"></i>
+            </div>
+            <a routerLink="/depot" class="small-box-footer">Plus d'informations <i
+                class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <!--<div class="col-lg-3 col-6">
+
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3>{{ nbvendeur }}</h3>
+
+              <p>Vendeurs</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <a routerLink="/vendeur" class="small-box-footer">Plus d'informations <i
+                class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>-->
+        <!-- ./col -->
+      </div>
+    </div>
+  </div>

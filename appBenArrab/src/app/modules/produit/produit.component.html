@@ -1,0 +1,296 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Produits</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/dashboard">Accueil</a></li>
+          <li class="breadcrumb-item active">Produits</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div *ngIf="!OnLoud">
+    <mat-spinner class="center-spinner"></mat-spinner>
+  </div>
+  <div *ngIf="OnLoud">
+    <div class="container-fluid">
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title marge-en-haut">List des Produits</h3>
+              <button type="button" data-toggle="modal" data-target="#produit-modal" class="card-title btn btn-primary"
+                style="float: right" class="btn btn-primary">
+                Ajouter Produit
+              </button>
+
+
+            </div>
+
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+
+
+              <mat-card class="w-100">
+                <mat-card-content>
+                  <form>
+                    <mat-form-field style="float: right">
+                      <!-- <mat-label >Filter</mat-label> -->
+                      <input matInput (keyup)="applyFilter($event)" class="marge-en-haut" placeholder="recherche"
+                        #input>
+                      <mat-icon matSuffix>search</mat-icon>
+                      <!-- #input tsakar el input -->
+                    </mat-form-field>
+                  </form>
+                  <div class="table-responsive">
+
+                    <table mat-table [dataSource]="datasource" matSort>
+                      <!-- <table mat-table [dataSource]="dataSource" class="text-nowrap w-100"> -->
+
+                      <!-- Id Column -->
+                      <ng-container matColumnDef="date">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.date_stock}}</td>
+                      </ng-container>
+
+                      <!-- Nom Column -->
+                      <ng-container matColumnDef="qualiter">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Qualité </th>
+                        <td mat-cell *matCellDef="let element">{{element.qualiter}}
+                          <!-- <p class="mb-0 fw-normal op-5">{{ element.work }}</p> -->
+                        </td>
+                      </ng-container>
+
+
+                      <!-- Prenom Column -->
+                      <ng-container matColumnDef="grammage">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Grammage </th>
+                        <td mat-cell *matCellDef="let element">{{element.grammage}}
+                        </td>
+                      </ng-container>
+
+                      <!-- Ville Column -->
+                      <ng-container matColumnDef="type">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Type </th>
+                        <td mat-cell *matCellDef="let element">
+                          <!--Format : 70 * 100 /Laize-->
+                          {{element.type}}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="poids">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Poids </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.poids}}
+                        </td>
+                      </ng-container>
+                      <!--<ng-container matColumnDef="prix_Enchere">
+                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Etat </th>
+                        <td mat-cell *matCellDef="let element">
+
+                          <div
+                            *ngIf="(element.date_expiration | slice:0:10) > (dateAujourdhui | date:'yyyy-MM-dd') && element.etat_vente === 0  ">
+
+                            <p class="mb-0 fw-large badge bg-info">produit en vente</p>
+                          </div>
+                          <div
+                            *ngIf="(element.date_expiration | slice:0:10) <= (dateAujourdhui | date:'yyyy-MM-dd') && element.etat_vente === 0 ">
+                            <p class="mb-0 fw-medium badge bg-danger">Format : 70 * 100</p>
+                          </div>
+                          <div *ngIf="element.etat_vente === 1">
+                            <p class="mb-0 fw-medium badge bg-success">Laize</p>
+                          </div>
+
+                        </td>
+                      </ng-container>-->
+
+
+
+                      <!-- Action Column -->
+                      <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef> Action </th>
+                        <td mat-cell *matCellDef="let element">
+                          <!-- <p class="mb-0 fw-medium">{{element.action}}</p> -->
+                          <button routerLink="/ProfileProduit/{{element.id}}" mat-mini-fab class="mb-8 me-8"
+                            color="primary" title="profile">
+                            <mat-icon aria-label="Profile" class="mat-icon-no-color">visibility</mat-icon>
+                          </button>
+
+                        </td>
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<!-- modal-->
+<div class="modal fade" id="produit-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ajouter Produit</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModalAndResetForm()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="ProduitForm" (ngSubmit)="onsub()">
+        <div class="modal-body">
+          
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="qualiter">Qualité</label>
+                  <input type="text" formControlName="qualiter" class="form-control"
+                    [ngClass]="{ 'is-invalid': QualiterErrors.includes('qualiter') }" id="qualiter" placeholder="Qualité Produit"
+                    (input)="clearQualiterError()" (focus)="onQualiterFocus()" (blur)="onQualiterBlur()" />
+                  <span id="qualiter-error" *ngIf="QualiterErrors.includes('qualiter')" class="error invalid-feedback">
+                    {{ formQualiterError.errorForqualiter }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="date_stock">Date</label>
+                  <input type="Date" formControlName="date_stock" class="form-control"
+                    [ngClass]="{ 'is-invalid': DateErrors.includes('date') }" id="date"
+                    (input)="clearDateError()" (focus)="onDateFocus()" (blur)="onDateBlur()" />
+                  <span id="date-error" *ngIf="DateErrors.includes('date')" class="error invalid-feedback">
+                    {{ formDateError.errorFordate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="grammage">Grammage</label>
+                  <input type="text" formControlName="grammage" class="form-control"
+                    [ngClass]="{ 'is-invalid': GrammageErrors.includes('grammage') }" id="grammage" placeholder="Grammage de Produit"
+                    (input)="clearGrammageError()" (focus)="onGrammageFocus()" (blur)="onGrammageBlur()" />
+                  <span id="grammage-error" *ngIf="GrammageErrors.includes('grammage')" class="error invalid-feedback">
+                    {{ formGrammageError.errorForgrammage }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="poids">Poids</label>
+                  <input type="text" formControlName="poids" class="form-control"
+                    [ngClass]="{ 'is-invalid': PoidsErrors.includes('poids') }" id="poids" placeholder="Poids de Produit"
+                    (input)="clearPoidsError()" (focus)="onPoidsFocus()" (blur)="onPoidsBlur()" />
+                  <span id="poids-error" *ngIf="PoidsErrors.includes('poids')" class="error invalid-feedback">
+                    {{ formPoidsError.errorForpoids }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="type">Type</label>
+              <select formControlName="type" class="form-control" [ngClass]="{ 'is-invalid': TypeErrors.includes('type') }" id="type"
+              (input)="clearTypeError()" (focus)="onTypeFocus()" (blur)="onTypeBlur()">
+                <option value="Laize">Laize</option>
+                <option value="Format">Format</option>
+              </select>
+
+              <span id="type-error" *ngIf="TypeErrors.includes('type')" class="error invalid-feedback">
+                {{ formTypeError.errorFortype }}
+              </span>
+            </div>
+
+            <!--<div class="form-group">
+              <label for="nomproduit">Format</label>
+                  <input type="text" formControlName="nomproduit" class="form-control"
+                    [ngClass]="{ 'is-invalid': errors.includes('nom') }" id="nomproduit" placeholder="Nom Produit"
+                    (input)="clearError()" (focus)="onFocus()" (blur)="onBlur()" />
+                  <span id="nomproduit-error" *ngIf="errors.includes('nom')" class="error invalid-feedback">
+                    {{ formError.errorFornom }}
+                  </span>
+            </div>-->
+
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="depotID">Depot</label>
+                  <select formControlName="depotID" class="form-control" (change)="GetrechercherProduits()" [ngClass]="{ 'is-invalid': DepotErrors.includes('depot') }" id="depot"
+                  (input)="clearDepotError()" (focus)="onDepotFocus()" (blur)="onDepotBlur()">
+                    <option value="0" disabled selected>Selectionner un depôt</option>  
+                    <option *ngFor="let d of depot ; let i=index " [value]="d.id">{{d.nomdepot}}</option>
+                  </select>
+    
+                  <span id="depot-error" *ngIf="DepotErrors.includes('depot')" class="error invalid-feedback">
+                    {{ formDepotError.errorFordepot }}
+                  </span>
+                </div>
+              </div>
+              
+              <div class="col-6">
+                <div class="form-group">
+                  <div *ngIf="ProduitForm.get('depotID')?.value !==0">
+                    <label for="lignedepID">Ligne Depot</label>
+                    <select formControlName="lignedepID" class="form-control" [ngClass]="{ 'is-invalid': LigneErrors.includes('ligne') }" id="ligne"
+                    (input)="clearLigneError()" (focus)="onLigneFocus()" (blur)="onLigneBlur()">
+                        <option value="0" disabled selected>Selectionner une ligne</option>
+                        <option *ngFor="let ld of dataLD ; let i=index " [value]="ld.id">{{ld.nomlignedep}}</option>
+                    </select>
+      
+                    <span id="ligne-error" *ngIf="LigneErrors.includes('ligne')" class="error invalid-feedback">
+                      {{ formLigneError.errorForligne }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- /.card-body -->
+
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" (click)="closeModalAndResetForm()" data-dismiss="modal">
+            Anuler
+          </button>
+          <button type="submit" class="btn btn-primary">
+            Create
+          </button>
+
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--fin modal-->
